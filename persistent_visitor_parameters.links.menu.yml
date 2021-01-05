@@ -1,0 +1,6 @@
+persistent_visitor_parameters.settings:
+  title: 'Persistent Visitor Parameters Settings'
+  parent: 'system.admin_config_content'
+  route_name: persistent_visitor_parameters.settings
+  description: 'Configuration for the Persistent Visitor Parameters'
+  weight: 99

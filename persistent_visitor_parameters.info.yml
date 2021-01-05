@@ -1,0 +1,6 @@
+name: Persistent Visitor Parameters
+type: module
+description: 'Checks GET and HTTP Request parameters from anonymous visitors, and saves those in a cookie for further processing'
+core_version_requirement: ^8.8 || ^9
+package: Custom
+configure: persistent_visitor_parameters.settings
