@@ -26,7 +26,7 @@ FEATURES
 ------------
 * Can read `GET` and `HTTP Request` parameters, and store them into cookie
 * Cookie lifetime is configurable (current session, custom, forever)
-* Respects browser `DNT` Setting (Do-Not-Track)
+* (configurable) Respects browser `DNT` Setting (Do-Not-Track)
 * Other modules can easily read cookie data using `persistent_visitor_parameters.cookie_manager` service
 
 INSTALLATION
