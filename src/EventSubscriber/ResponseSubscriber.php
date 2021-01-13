@@ -48,9 +48,11 @@ class ResponseSubscriber implements EventSubscriberInterface {
 
     $request = $event->getRequest();
 
-    // respect Do Not Track
-    if ($request->server->get('HTTP_DNT')) {
-      return;
+    // respect Do Not Track if not otherwise configured
+    if (!$this->cookieManager->dontRespectDnt()) {
+      if ($request->server->get('HTTP_DNT')) {
+        return;
+      }
     }
 
     // only non-logged users

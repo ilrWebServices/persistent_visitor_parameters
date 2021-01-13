@@ -107,4 +107,13 @@ class CookieManager {
     return $value;
   }
 
+  /**
+   * @inheritDoc
+   */
+  public function dontRespectDnt() {
+    $config = $this->configFactory->get('persistent_visitor_parameters.settings');
+    $dontRespectConfig = $config->get('dont_respect_dnt');
+    return empty($dontRespectConfig) ? FALSE : TRUE;
+  }
+
 }

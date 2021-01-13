@@ -69,6 +69,13 @@ class SettingsForm extends ConfigFormBase {
       ],
     ];
 
+    $form['dont_respect_dnt'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Don\'t respect DNT?'),
+      '#description' => t('You can choose to do not respect visitors browser DNT setting (Do Not Track)'),
+      '#default_value' => $config->get('dont_respect_dnt') ? $config->get('dont_respect_dnt') : NULL,
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -83,6 +90,7 @@ class SettingsForm extends ConfigFormBase {
       ->set('server_parameters', $form_state->getValue('server_parameters'))
       ->set('cookie_expire', $form_state->getValue('cookie_expire'))
       ->set('custom_expire', $form_state->getValue('custom_expire'))
+      ->set('dont_respect_dnt', $form_state->getValue('dont_respect_dnt'))
       ->save();
   }
 
