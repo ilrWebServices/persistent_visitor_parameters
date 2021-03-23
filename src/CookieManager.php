@@ -47,11 +47,22 @@ class CookieManager {
   public function setCookie($response) {
     $cookieContent = array_merge($this->neededGetParams(), $this->neededServerParams());
 
-    if ($cookieContent) {
-      $expire = $this->cookieExpiration();
-      $cookie = new Cookie(self::COOKIE_NAME, serialize($cookieContent), $expire, '/');
-      $response->headers->setCookie($cookie);
+    // if expected parameters are missing, we don't need to do anything
+    if (empty($cookieContent)) {
+      return;
     }
+
+    $config = $this->configFactory->get('persistent_visitor_parameters.settings');
+    $mode = $config->get('mode');
+
+    // if first-touch mode activated, and cookie already exists... skip the new one. Otherwise - replace it with a new one
+    if (empty($mode) && !empty($this->getCookie())) {
+      return;
+    }
+
+    $expire = $this->cookieExpiration();
+    $cookie = new Cookie(self::COOKIE_NAME, serialize($cookieContent), $expire, '/');
+    $response->headers->setCookie($cookie);
 
   }
 

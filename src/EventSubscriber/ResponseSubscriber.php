@@ -60,11 +60,6 @@ class ResponseSubscriber implements EventSubscriberInterface {
       return;
     }
 
-    // create cookie only on the very first visit
-    if (!empty($this->cookieManager->getCookie())) {
-      return;
-    }
-
     $this->cookieManager->setCookie($response);
   }
 

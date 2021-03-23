@@ -46,6 +46,17 @@ class SettingsForm extends ConfigFormBase {
       '#default_value' => $config->get('server_parameters'),
     ];
 
+    $form['mode'] = [
+      '#type' => 'radios',
+      '#title' => t('Parameters save mode'),
+      '#description' => t('Consider only very first-touch parameters, or allow it to be overridden with last-touch parameters?'),
+      '#options' => [
+        0 => t('First-touch'),
+        1 => t('Last-touch'),
+      ],
+      '#default_value' => $config->get('mode') ? $config->get('mode') : 0,
+    ];
+
     $form['cookie_expire'] = [
       '#type' => 'radios',
       '#title' => t('Cookie expiration'),
@@ -88,6 +99,7 @@ class SettingsForm extends ConfigFormBase {
     $this->config('persistent_visitor_parameters.settings')
       ->set('get_parameters', $form_state->getValue('get_parameters'))
       ->set('server_parameters', $form_state->getValue('server_parameters'))
+      ->set('mode', $form_state->getValue('mode'))
       ->set('cookie_expire', $form_state->getValue('cookie_expire'))
       ->set('custom_expire', $form_state->getValue('custom_expire'))
       ->set('dont_respect_dnt', $form_state->getValue('dont_respect_dnt'))
