@@ -62,7 +62,7 @@ class CookieManager {
     }
 
     $expire = $this->cookieExpiration();
-    $cookie = new Cookie($this->options['cookie_name'], serialize($cookieContent), $expire, '/', $this->options['cookie_domain']);
+    $cookie = Cookie::create($this->options['cookie_name'], serialize($cookieContent), $expire, '/', $this->options['cookie_domain']);
     $response->headers->setCookie($cookie);
   }
 
