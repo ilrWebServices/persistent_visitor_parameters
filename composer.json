@@ -1,0 +1,13 @@
+{
+  "name": "drupal/persistent_visitor_parameters",
+  "type": "drupal-module",
+  "description": "Checks GET and HTTP Request parameters from anonymous visitors, and saves those in a cookie for further processing",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://github.com/ilrWebServices/persistent_visitor_parameters",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://github.com/ilrWebServices/persistent_visitor_parameters/issues",
+    "source": "https://github.com/ilrWebServices/persistent_visitor_parameters.git"
+  }
+}
