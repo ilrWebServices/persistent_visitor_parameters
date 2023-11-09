@@ -1,10 +1,14 @@
+parameters:
+  persistent_visitor_parameters.options:
+    # Default options for persistent_visitor_parameters.
+    cookie_name: pvp_stored_variables
+    cookie_domain: NULL
 services:
   persistent_visitor_parameters.response_subscriber:
     class: Drupal\persistent_visitor_parameters\EventSubscriber\ResponseSubscriber
     arguments: ['@persistent_visitor_parameters.cookie_manager', '@current_user']
     tags:
       - {name: event_subscriber}
-
   persistent_visitor_parameters.cookie_manager:
     class: Drupal\persistent_visitor_parameters\CookieManager
-    arguments: ['@request_stack', '@config.factory', '@datetime.time']
+    arguments: ['@request_stack', '@config.factory', '@datetime.time', '%persistent_visitor_parameters.options%']

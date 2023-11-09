@@ -38,7 +38,16 @@ INSTALLATION
 CONFIGURATION
 -------------
 * Configuration page is located here: `admin/config/persistent-visitor-parameters`
-* Configure parameters you would like to track, for example `utm_source`, `utm_medium` (GET) or `HTTP_REFERER` (HTTP Request) parameters 
+* Configure parameters you would like to track, for example `utm_source`, `utm_medium` (GET) or `HTTP_REFERER` (HTTP Request) parameters
+
+To modify the cookie options, such as name or domain, you can override the `persistent_visitor_parameters.options` service parameter. For example, in `sites/default/services.yml` or `sites/development.services.yml`:
+
+```
+parameters:
+  persistent_visitor_parameters.options:
+    cookie_name: pvp_stored_variables
+    cookie_domain: .example.com
+```
 
 USAGE
 -------------

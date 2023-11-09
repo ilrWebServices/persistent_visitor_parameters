@@ -15,11 +15,6 @@ class CookieManager {
   /**
    * @inheritDoc
    */
-  const COOKIE_NAME = 'pvp_stored_variables';
-
-  /**
-   * @inheritDoc
-   */
   protected $requestStack;
 
   /**
@@ -33,12 +28,18 @@ class CookieManager {
   protected $time;
 
   /**
+   * Service parameter options.
+   */
+  protected $options = [];
+
+  /**
    * @inheritDoc
    */
-  public function __construct(RequestStack $request_stack, ConfigFactoryInterface $config_factory, TimeInterface $time) {
+  public function __construct(RequestStack $request_stack, ConfigFactoryInterface $config_factory, TimeInterface $time, array $options = []) {
     $this->requestStack = $request_stack;
     $this->configFactory = $config_factory;
     $this->time = $time;
+    $this->options = $options + ['cookie_name' => 'pvp_stored_variables', 'cookie_domain' => NULL];
   }
 
   /**
@@ -61,16 +62,15 @@ class CookieManager {
     }
 
     $expire = $this->cookieExpiration();
-    $cookie = new Cookie(self::COOKIE_NAME, serialize($cookieContent), $expire, '/');
+    $cookie = new Cookie($this->options['cookie_name'], serialize($cookieContent), $expire, '/', $this->options['cookie_domain']);
     $response->headers->setCookie($cookie);
-
   }
 
   /**
    * @inheritDoc
    */
   public function getCookie() {
-    $cookie = $this->requestStack->getCurrentRequest()->cookies->get(self::COOKIE_NAME);
+    $cookie = $this->requestStack->getCurrentRequest()->cookies->get($this->options['cookie_name']) ?? '';
     return unserialize($cookie);
   }
 
