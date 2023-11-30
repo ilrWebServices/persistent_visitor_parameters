@@ -36,7 +36,7 @@ class ResponseSubscriber implements EventSubscriberInterface {
    * @inheritDoc
    */
   public function onRespond(ResponseEvent $event) {
-    if (!$event->isMasterRequest()) {
+    if (!$event->isMainRequest()) {
       return;
     }
 
